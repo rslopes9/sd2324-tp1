@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+option java_package = "tukano.impl.grpc.generated_java";
+option java_outer_classname = "UsersProtoBuf";
+
+
+service Users {
+
+	rpc createUser( CreateUserArgs ) returns (CreateUserResult) {}
+
+	rpc getUser( GetUserArgs) returns (GetUserResult){}
+
+	rpc updateUser( UpdateUserArgs) returns (UpdateUserResult){}
+
+	rpc deleteUser( DeleteUserArgs) returns (DeleteUserResult){}
+
+	rpc searchUsers( SearchUserArgs) returns (stream GrpcUser){}
+
+}
+
+message GrpcUser {
+	optional string userId = 1;
+	optional string email = 2;
+	optional string displayName = 3;
+	optional string password = 4;
+}
+
+
+message CreateUserArgs {
+	GrpcUser user = 1;
+}
+
+message CreateUserResult {
+	string userId = 1;
+}
+
+message GetUserArgs {
+	string userId = 1;
+	string password = 2;
+}
+
+message GetUserResult {
+	GrpcUser user = 1;
+}
+
+message UpdateUserArgs {
+	string userId = 1;
+	string password = 2;
+	GrpcUser user = 3;
+}
+
+message UpdateUserResult {
+	GrpcUser user = 1;
+}
+
+message DeleteUserArgs {
+	string userId = 1;
+	string password = 2;
+}
+
+message DeleteUserResult {
+	GrpcUser user = 1;
+}
+
+message SearchUserArgs {
+	string pattern = 1;
+}
