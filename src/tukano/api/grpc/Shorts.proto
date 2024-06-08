@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+option java_package = "tukano.impl.grpc.generated_java";
+option java_outer_classname = "ShortsProtoBuf";
+
+
+service Shorts {
+
+	rpc createShort( CreateShortArgs ) returns (CreateShortResult);
+
+	rpc deleteShort( DeleteShortArgs ) returns (DeleteShortResult);
+
+	rpc getShort( GetShortArgs ) returns (GetShortResult);
+
+	rpc getShorts( GetShortsArgs ) returns (GetShortsResult);
+
+	rpc follow( FollowArgs) returns (FollowResult);
+
+	rpc followers( FollowersArgs ) returns (FollowersResult);
+
+	rpc like( LikeArgs) returns (LikeResult);
+
+	rpc likes( LikesArgs ) returns (LikesResult);
+
+	rpc getFeed( GetFeedArgs) returns (GetFeedResult);
+
+	rpc deleteAllShorts( DeleteAllShortsArgs ) returns (DeleteAllShortsResult);
+
+}
+
+message GrpcShort {
+	string shortId = 1;
+	string ownerId = 2;
+	string blobUrl = 3;
+	int64 timestamp = 4;
+	int32 totalLikes = 5;
+}
+
+message CreateShortArgs {
+	string userId = 1;
+	string password = 2;
+}
+
+message CreateShortResult {
+	GrpcShort value = 1;
+}
+
+message DeleteShortArgs {
+	string shortId = 1;
+	string password = 2;
+}
+
+message DeleteShortResult {
+}
+
+message GetShortArgs {
+	string shortId = 1;
+}
+
+message GetShortResult {
+	GrpcShort value = 1;
+}
+
+message GetShortsArgs {
+	string userId = 1;
+}
+
+message GetShortsResult {
+	repeated string shortId = 1;
+}
+
+message FollowArgs {
+	string userId1 = 1;
+	string userId2 = 2;
+	bool isFollowing = 3;
+	string password = 4;
+}
+
+message FollowResult {
+}
+
+message FollowersArgs {
+	string userId = 1;
+	string password = 2;
+}
+
+message FollowersResult {
+	repeated string userId = 1;
+}
+
+message LikeArgs {
+	string shortId = 1;
+	string userId = 2;
+	bool isLiked = 3;
+	string password = 4;
+}
+
+message LikeResult {
+}
+
+message LikesArgs {
+	string shortId = 1;
+	string password = 2;
+}
+
+message LikesResult {
+	repeated string userId = 1;
+}
+
+message GetFeedArgs {
+	string userId = 1;
+	string password = 2;
+}
+
+message GetFeedResult {
+	repeated string shortId = 1;
+}
+
+message DeleteAllShortsArgs {
+	string userId = 1;
+	string password = 2;
+	string token = 3;
+}
+
+message DeleteAllShortsResult {
+}
